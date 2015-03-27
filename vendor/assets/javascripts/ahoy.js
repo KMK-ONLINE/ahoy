@@ -270,16 +270,8 @@
     ahoy.trackChanges();
   };
 
-  // push events from queue
-  try {
-    eventQueue = JSON.parse(getCookie("ahoy_events") || "[]");
-  } catch (e) {
-    // do nothing
-  }
-
-  for (var i = 0; i < eventQueue.length; i++) {
-    trackEvent(eventQueue[i]);
-  }
+  // clear events queue
+  destroyCookie("ahoy_events");
 
   window.ahoy = ahoy;
 }(window));
