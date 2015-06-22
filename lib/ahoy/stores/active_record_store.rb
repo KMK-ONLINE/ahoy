@@ -7,7 +7,9 @@ module Ahoy
           visit_model.new do |v|
             v.id = ahoy.visit_id
             v.visitor_id = ahoy.visitor_id
-            v.user = user if v.respond_to?(:user=)
+            if user
+              v.user_id = user.id
+            end
             v.started_at = options[:started_at]
           end
 
@@ -28,7 +30,9 @@ module Ahoy
           event_model.new do |e|
             e.id = options[:id]
             e.visit_id = ahoy.visit_id
-            e.user = user if e.respond_to?(:user=)
+            if user
+              e.user_id = user.id
+            end
             e.name = name
             e.properties = properties
             e.time = options[:time]

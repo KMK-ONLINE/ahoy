@@ -17,13 +17,9 @@ module Ahoy
 
       def authenticate(user)
         @user = user
-        if visit and visit.respond_to?(:user) and !visit.user
-          begin
-            visit.user = user
-            visit.save!
-          rescue ActiveRecord::AssociationTypeMismatch
-            # do nothing
-          end
+        if visit && visit.user_id.blank? && user
+          visit.user_id = user.id
+          visit.save!
         end
       end
 
